@@ -85,7 +85,7 @@ public class OrderCalcImpl implements OrderCalc {
      * <p>Итоговая цена рассчитывается по формуле:</p>
      *
      * <pre>
-     * result = total - discount + shipping
+     * {@code result = total - discount + shipping}
      * </pre>
      *
      * <p>Дополнительные правила:</p>
