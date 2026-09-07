@@ -19,6 +19,7 @@ java {
 dependencies {
     implementation(libs.log4j.slf4j)
 
+    testImplementation(libs.assertj)
     testImplementation(platform(libs.junit.bom))
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly(libs.junit.launcher)

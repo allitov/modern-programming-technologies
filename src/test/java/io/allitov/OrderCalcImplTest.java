@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderCalcImplTest {
 
@@ -27,7 +27,7 @@ class OrderCalcImplTest {
     void shouldApplyDiscount(double total, boolean isPremium, double expected) {
         double actual = orderCalc.applyDiscount(total, isPremium);
 
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -39,7 +39,7 @@ class OrderCalcImplTest {
     void shouldCalculateShipping(double total, double expected) {
         double actual = orderCalc.calcShipping(total);
 
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -53,7 +53,7 @@ class OrderCalcImplTest {
     void shouldCalculateFinalPrice(double total, double discount, double shipping, double expected) {
         double actual = orderCalc.finalPrice(total, discount, shipping);
 
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest
@@ -61,7 +61,7 @@ class OrderCalcImplTest {
     void shouldCountExpensiveItems(List<Double> prices, double threshold, int expected) {
         int actual = orderCalc.countExpensiveItems(prices, threshold);
 
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> argumentsForShouldCountExpensiveItems() {
@@ -76,7 +76,7 @@ class OrderCalcImplTest {
     void shouldCountProductOddIndices(List<Double> prices, double expected) {
         double actual = orderCalc.productOddIndices(prices);
 
-        assertEquals(expected, actual);
+        assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> argumentsForShouldCountProductOddIndices() {
@@ -91,7 +91,7 @@ class OrderCalcImplTest {
     void shouldSumOddBelowMainDiagonal(List<List<Integer>> matrix, int expected ) {
         int actual = orderCalc.sumOddBelowMainDiagonal(matrix);
 
-        assertEquals(expected, actual); 
+        assertThat(actual).isEqualTo(expected);
     }
 
     private static Stream<Arguments> provideMatrices() {
