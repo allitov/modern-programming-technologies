@@ -70,4 +70,35 @@ class OrderCalcImplTest {
                 Arguments.of(List.of(100., 50.), 50., 1)
         );
     }
+
+    @ParameterizedTest
+    @MethodSource("argumentsForShouldCountProductOddIndices")
+    void shouldCountProductOddIndices(List<Double> prices, double expected) {
+        double actual = orderCalc.productOddIndices(prices);
+
+        assertEquals(expected, actual);
+    }
+
+    private static Stream<Arguments> argumentsForShouldCountProductOddIndices() {
+        return Stream.of(
+                Arguments.of(List.of(10., 20.), 20.),
+                Arguments.of(List.of(), 1.)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideMatrices")
+    void shouldSumOddBelowMainDiagonal(List<List<Integer>> matrix, int expected ) {
+        int actual = orderCalc.sumOddBelowMainDiagonal(matrix);
+
+        assertEquals(expected, actual); 
+    }
+
+    private static Stream<Arguments> provideMatrices() {
+        return Stream.of(
+                Arguments.of(List.of(List.of(2, 4), List.of(3, 6)), 3),
+                Arguments.of(List.of(List.of(2, 4), List.of(6, 8)), 0),
+                Arguments.of(List.of(List.of(2, 4), List.of()), 0)
+        );
+    }
 }
