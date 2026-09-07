@@ -2,7 +2,12 @@ package io.allitov;
 
 import io.allitov.mpt.OrderCalcImpl;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -49,5 +54,20 @@ class OrderCalcImplTest {
         double actual = orderCalc.finalPrice(total, discount, shipping);
 
         assertEquals(expected, actual);
+    }
+
+    @ParameterizedTest
+    @MethodSource("argumentsForShouldCountExpensiveItems")
+    void shouldCountExpensiveItems(List<Double> prices, double threshold, double expected) {
+        double actual = orderCalc.countExpensiveItems(prices, threshold);
+
+        assertEquals(expected, actual);
+    }
+
+    private static Stream<Arguments> argumentsForShouldCountExpensiveItems() {
+        return Stream.of(
+                Arguments.of(List.of(), 50., 0.),
+                Arguments.of(List.of(100., 50.), 50., 1.)
+        );
     }
 }
