@@ -141,4 +141,50 @@ public class OrderCalcImpl implements OrderCalc {
 
         return count;
     }
+
+    /**
+     * Вычисляет произведение цен товаров, находящихся на нечётных индексах корзины.
+     *
+     * <p>Если список пуст или содержит только элементы с чётными индексами,
+     * метод возвращает {@code 1.0}.</p>
+     *
+     * @param prices список цен товаров в корзине.
+     * @return произведение цен товаров на нечётных индексах.
+     */
+    public double productOddIndices(List<Double> prices) {
+        double product = 1.0;
+
+        for (int i = 1; i < prices.size(); i += 2) {
+            product *= prices.get(i);
+        }
+
+        return product;
+    }
+
+    /**
+     * Вычисляет сумму нечётных элементов матрицы, расположенных
+     * ниже главной диагонали.
+     *
+     * <p>Элемент считается расположенным ниже главной диагонали,
+     * если индекс его строки больше индекса столбца:
+     * {@code row > column}.</p>
+     *
+     * <p>Если подходящих элементов нет, метод возвращает {@code 0}.</p>
+     *
+     * @param matrix двумерный список целых чисел (матрица).
+     * @return сумма нечётных элементов, расположенных ниже главной диагонали.
+     */
+    public int sumOddBelowMainDiagonal(List<List<Integer>> matrix) {
+        int sum = 0;
+        for (int row = 0; row < matrix.size(); row++) {
+            for (int col = 0; col < row && col < matrix.get(row).size(); col++) {
+                int element = matrix.get(row).get(col);
+                if (element % 2 != 0) {
+                    sum += element;
+                }
+            }
+        }
+
+        return sum;
+    }
 }
