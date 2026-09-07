@@ -58,16 +58,16 @@ class OrderCalcImplTest {
 
     @ParameterizedTest
     @MethodSource("argumentsForShouldCountExpensiveItems")
-    void shouldCountExpensiveItems(List<Double> prices, double threshold, double expected) {
-        double actual = orderCalc.countExpensiveItems(prices, threshold);
+    void shouldCountExpensiveItems(List<Double> prices, double threshold, int expected) {
+        int actual = orderCalc.countExpensiveItems(prices, threshold);
 
         assertEquals(expected, actual);
     }
 
     private static Stream<Arguments> argumentsForShouldCountExpensiveItems() {
         return Stream.of(
-                Arguments.of(List.of(), 50., 0.),
-                Arguments.of(List.of(100., 50.), 50., 1.)
+                Arguments.of(List.of(), 50., 0),
+                Arguments.of(List.of(100., 50.), 50., 1)
         );
     }
 }
