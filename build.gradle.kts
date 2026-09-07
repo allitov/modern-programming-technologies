@@ -1,6 +1,7 @@
 plugins {
     application
     alias(libs.plugins.lombok)
+    jacoco
 }
 
 group = "io.allitov"
@@ -14,6 +15,10 @@ java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(25))
     }
+}
+
+jacoco {
+    toolVersion = "0.8.14"
 }
 
 dependencies {
@@ -31,4 +36,11 @@ tasks.run {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks.jacocoTestReport {
+    reports {
+        html.required.set(true)
+    }
+    dependsOn(tasks.test)
 }
