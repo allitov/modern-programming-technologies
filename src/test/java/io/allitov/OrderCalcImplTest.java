@@ -88,18 +88,19 @@ class OrderCalcImplTest {
     }
 
     @ParameterizedTest
-    @MethodSource("provideMatrices")
+    @MethodSource("argumentsForShouldSumOddBelowMainDiagonal")
     void shouldSumOddBelowMainDiagonal(List<List<Integer>> matrix, int expected) {
         int actual = orderCalc.sumOddBelowMainDiagonal(matrix);
 
         assertThat(actual).isEqualTo(expected);
     }
 
-    private static Stream<Arguments> provideMatrices() {
+    private static Stream<Arguments> argumentsForShouldSumOddBelowMainDiagonal() {
         return Stream.of(
                 Arguments.of(List.of(List.of(2, 4), List.of(3, 6)), 3),
                 Arguments.of(List.of(List.of(2, 4), List.of(6, 8)), 0),
-                Arguments.of(List.of(List.of(2, 4), List.of()), 0)
+                Arguments.of(List.of(List.of(2, 4), List.of()), 0),
+                Arguments.of(List.of(List.of(), List.of(3, 6)), 0)
         );
     }
 
