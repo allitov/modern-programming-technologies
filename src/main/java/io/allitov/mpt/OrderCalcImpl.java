@@ -1,5 +1,6 @@
 package io.allitov.mpt;
 
+import java.util.Collections;
 import java.util.List;
 
 public class OrderCalcImpl implements OrderCalc {
@@ -187,4 +188,74 @@ public class OrderCalcImpl implements OrderCalc {
 
         return sum;
     }
+
+    // Калашникова
+
+    /**
+     * Выполняет циклический сдвиг цен вправо на указанное количество позиций.
+     *
+     * <p>Если список пуст, сдвиг не положительный или его величина кратна
+     * размеру списка, список не изменяется.</p>
+     *
+     * @param prices список цен товаров.
+     * @param shift  количество позиций, на которое необходимо выполнить сдвиг вправо.
+     */
+    public void rotatePricesRight(List<Double> prices, int shift) {
+        if (prices.isEmpty() || shift <= 0) {
+            return;
+        }
+
+        shift %= prices.size();
+
+        if (shift == 0) {
+            return;
+        }
+
+        Collections.rotate(prices, shift);
+    }
+
+    /**
+     * Вычисляет произведение элементов двумерного списка,
+     * для которых сумма индексов строки и столбца является нечётной.
+     *
+     * <p>Если подходящих элементов нет, метод возвращает {@code 1.0}.</p>
+     *
+     * @param matrix двумерный список чисел.
+     * @return произведение элементов, для которых {@code (i + j) % 2 != 0}.
+     */
+    public double productOddIndexSum(List<List<Double>> matrix) {
+        double product = 1.0;
+        boolean hasElements = false;
+
+        for (int i = 0; i < matrix.size(); i++) {
+            for (int j = 0; j < matrix.get(i).size(); j++) {
+                if ((i + j) % 2 != 0) {
+                    product *= matrix.get(i).get(j);
+                    hasElements = true;
+                }
+            }
+        }
+
+        return hasElements ? product : 1.0;
+    }
+
+    // Фролов
+
+    /**
+     * Вычисляет произведение элементов списка, * находящихся на чётных индексах.
+     *
+     * <p>Индексы элементов начинаются с 0.</p>
+     * Если список пуст, возвращается 1.0.
+     *
+     * @param prices список цен.
+     * @return произведение элементов на чётных индексах.
+     */
+    public double productEvenIndices(List<Double> prices) {
+        double product = 1.0;
+        for (int i = 0; i < prices.size(); i += 2) {
+            product *= prices.get(i);
+        }
+        return product;
+    }
+
 }
