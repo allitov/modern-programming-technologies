@@ -1,5 +1,7 @@
 package io.allitov.mpt.todo;
 
+import io.allitov.mpt.todo.view.MainWindowImpl;
+
 import java.awt.EventQueue;
 
 /**

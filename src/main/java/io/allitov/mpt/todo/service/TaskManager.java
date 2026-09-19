@@ -1,4 +1,7 @@
-package io.allitov.mpt.todo;
+package io.allitov.mpt.todo.service;
+
+import io.allitov.mpt.todo.model.Project;
+import io.allitov.mpt.todo.model.Task;
 
 import java.util.List;
 

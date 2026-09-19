@@ -1,4 +1,4 @@
-package io.allitov.mpt.todo;
+package io.allitov.mpt.todo.model;
 
 /**
  * Проект в менеджере задач.

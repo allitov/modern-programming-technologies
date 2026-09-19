@@ -1,7 +1,13 @@
-package io.allitov.mpt.todo;
+package io.allitov.mpt.todo.service;
 
 import java.util.List;
 
+import io.allitov.mpt.todo.model.Project;
+import io.allitov.mpt.todo.model.ProjectImpl;
+import io.allitov.mpt.todo.model.Task;
+import io.allitov.mpt.todo.model.TaskImpl;
+import io.allitov.mpt.todo.repository.Repository;
+import io.allitov.mpt.todo.repository.RepositoryImpl;
 import lombok.NoArgsConstructor;
 
 /**
