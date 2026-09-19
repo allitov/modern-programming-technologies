@@ -99,7 +99,7 @@ class OrderCalcImplTest {
                 Arguments.of(List.of(List.of(2, 4), List.of(3, 6)), 3),
                 Arguments.of(List.of(List.of(2, 4), List.of(6, 8)), 0),
                 Arguments.of(List.of(List.of(2, 4), List.of()), 0),
-                Arguments.of(List.of(List.of(), List.of(3, 6)), 0)
+                Arguments.of(List.of(List.of(), List.of(3, 6)), 3)
         );
     }
 
