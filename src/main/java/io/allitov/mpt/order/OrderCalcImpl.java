@@ -1,4 +1,4 @@
-package io.allitov.mpt;
+package io.allitov.mpt.order;
 
 import java.util.Collections;
 import java.util.List;
