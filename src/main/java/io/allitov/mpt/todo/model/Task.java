@@ -14,9 +14,9 @@ public class Task {
 
     private String description = "";
 
-    private String status = "Todo";
+    private TaskStatus status = TaskStatus.TODO;
 
-    private String priority = "Medium";
+    private TaskPriority priority = TaskPriority.MEDIUM;
 
     /**
      * Создает задачу с указанным идентификатором и названием.

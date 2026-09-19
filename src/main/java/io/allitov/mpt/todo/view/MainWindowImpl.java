@@ -2,6 +2,8 @@ package io.allitov.mpt.todo.view;
 
 import io.allitov.mpt.todo.model.Project;
 import io.allitov.mpt.todo.model.Task;
+import io.allitov.mpt.todo.model.TaskPriority;
+import io.allitov.mpt.todo.model.TaskStatus;
 import io.allitov.mpt.todo.service.TaskManager;
 import io.allitov.mpt.todo.service.TaskManagerImpl;
 
@@ -16,9 +18,13 @@ import java.util.List;
  */
 public class MainWindowImpl implements MainWindow {
 
+    private static final String ALL_STATUSES = "All statuses";
+
+    private static final String ALL_PRIORITIES = "All priorities";
+
     private final TaskManager manager = new TaskManagerImpl();
 
-    private final JFrame window = new JFrame("Task Manager - C++ Templates Lab");
+    private final JFrame window = new JFrame("Task Manager");
 
     private final JPanel contentPane = new JPanel(null);
 
@@ -54,17 +60,21 @@ public class MainWindowImpl implements MainWindow {
 
     private final JTextField searchInput = new JTextField();
 
-    private final JComboBox<String> statusChoice = new JComboBox<>(new DefaultComboBoxModel<>(
-            new String[] {"Todo", "In Progress", "Done"}));
+    private final JComboBox<TaskStatus> statusChoice = new JComboBox<>(TaskStatus.values());
 
-    private final JComboBox<String> priorityChoice = new JComboBox<>(new DefaultComboBoxModel<>(
-            new String[] {"Low", "Medium", "High"}));
+    private final JComboBox<TaskPriority> priorityChoice = new JComboBox<>(TaskPriority.values());
 
     private final JComboBox<String> statusFilter = new JComboBox<>(new DefaultComboBoxModel<>(
-            new String[] {"All statuses", "Todo", "In Progress", "Done"}));
+            new String[] {ALL_STATUSES,
+                    TaskStatus.TODO.getDisplayName(),
+                    TaskStatus.IN_PROGRESS.getDisplayName(),
+                    TaskStatus.DONE.getDisplayName()}));
 
     private final JComboBox<String> priorityFilter = new JComboBox<>(new DefaultComboBoxModel<>(
-            new String[] {"All priorities", "Low", "Medium", "High"}));
+            new String[] {ALL_PRIORITIES,
+                    TaskPriority.LOW.getDisplayName(),
+                    TaskPriority.MEDIUM.getDisplayName(),
+                    TaskPriority.HIGH.getDisplayName()}));
 
     private final JButton addTaskButton = new JButton("Add");
 
@@ -271,21 +281,23 @@ public class MainWindowImpl implements MainWindow {
 
         for (Task task : tasks) {
             String title = task.getTitle();
-            String status = task.getStatus();
-            String priority = task.getPriority();
+            TaskStatus status = task.getStatus();
+            TaskPriority priority = task.getPriority();
 
             boolean matchesSearch = search.isEmpty() || title.contains(search);
-            boolean matchesStatus = "All statuses".equals(selectedStatus) || status.equals(selectedStatus);
-            boolean matchesPriority = "All priorities".equals(selectedPriority) || priority.equals(selectedPriority);
+            boolean matchesStatus = ALL_STATUSES.equals(selectedStatus)
+                    || status.getDisplayName().equals(selectedStatus);
+            boolean matchesPriority = ALL_PRIORITIES.equals(selectedPriority)
+                    || priority.getDisplayName().equals(selectedPriority);
 
             if (matchesSearch && matchesStatus && matchesPriority) {
                 taskListModel.addElement("%d | %s | %s | %s".formatted(
-                        task.getId(), title, priority, status));
+                        task.getId(), title, priority.getDisplayName(), status.getDisplayName()));
                 shown++;
             }
         }
 
-        statistics.setText(String.format("Tasks: %d    Shown: %d    Projects: %d",
+        statistics.setText("Tasks: %d    Shown: %d    Projects: %d".formatted(
                 tasks.size(), shown, manager.getProjects().size()));
         updatingTasks = false;
     }
@@ -348,7 +360,7 @@ public class MainWindowImpl implements MainWindow {
         }
 
         manager.addTask(titleInput.getText(), descriptionInput.getText(),
-                choiceText(priorityChoice), choiceText(statusChoice));
+                selectedPriority(), selectedStatus());
         refreshTasks();
         clearTaskFields();
     }
@@ -364,7 +376,7 @@ public class MainWindowImpl implements MainWindow {
         }
 
         manager.updateTask(index, titleInput.getText(), descriptionInput.getText(),
-                choiceText(priorityChoice), choiceText(statusChoice));
+                selectedPriority(), selectedStatus());
         refreshTasks();
     }
 
@@ -440,6 +452,24 @@ public class MainWindowImpl implements MainWindow {
     private String choiceText(JComboBox<String> choice) {
         Object value = choice.getSelectedItem();
         return value == null ? "" : String.valueOf(value);
+    }
+
+    /**
+     * Получает выбранный приоритет задачи.
+     *
+     * @return выбранный приоритет.
+     */
+    private TaskPriority selectedPriority() {
+        return priorityChoice.getItemAt(priorityChoice.getSelectedIndex());
+    }
+
+    /**
+     * Получает выбранный статус задачи.
+     *
+     * @return выбранный статус.
+     */
+    private TaskStatus selectedStatus() {
+        return statusChoice.getItemAt(statusChoice.getSelectedIndex());
     }
 
     /**

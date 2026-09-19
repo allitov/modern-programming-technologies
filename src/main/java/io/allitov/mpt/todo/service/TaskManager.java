@@ -1,7 +1,9 @@
 package io.allitov.mpt.todo.service;
 
 import io.allitov.mpt.todo.model.Project;
+import io.allitov.mpt.todo.model.TaskPriority;
 import io.allitov.mpt.todo.model.Task;
+import io.allitov.mpt.todo.model.TaskStatus;
 
 import java.util.List;
 
@@ -18,7 +20,7 @@ public interface TaskManager {
      * @param priority приоритет задачи.
      * @param status статус задачи.
      */
-    void addTask(String title, String description, String priority, String status);
+    void addTask(String title, String description, TaskPriority priority, TaskStatus status);
 
     /**
      * Обновляет задачу по ее индексу, сохраняя исходный идентификатор.
@@ -29,7 +31,7 @@ public interface TaskManager {
      * @param priority новый приоритет задачи.
      * @param status новый статус задачи.
      */
-    void updateTask(int index, String title, String description, String priority, String status);
+    void updateTask(int index, String title, String description, TaskPriority priority, TaskStatus status);
 
     /**
      * Удаляет задачу по ее индексу.

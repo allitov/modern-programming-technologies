@@ -1,7 +1,9 @@
 package io.allitov.mpt.todo.service;
 
 import io.allitov.mpt.todo.model.Project;
+import io.allitov.mpt.todo.model.TaskPriority;
 import io.allitov.mpt.todo.model.Task;
+import io.allitov.mpt.todo.model.TaskStatus;
 import io.allitov.mpt.todo.repository.Repository;
 import io.allitov.mpt.todo.repository.RepositoryImpl;
 import lombok.NoArgsConstructor;
@@ -23,7 +25,7 @@ public class TaskManagerImpl implements TaskManager {
     private int nextProjectId = 1;
 
     @Override
-    public void addTask(String title, String description, String priority, String status) {
+    public void addTask(String title, String description, TaskPriority priority, TaskStatus status) {
         Task task = new Task(nextTaskId++, title);
         task.setDescription(description);
         task.setPriority(priority);
@@ -32,7 +34,7 @@ public class TaskManagerImpl implements TaskManager {
     }
 
     @Override
-    public void updateTask(int index, String title, String description, String priority, String status) {
+    public void updateTask(int index, String title, String description, TaskPriority priority, TaskStatus status) {
         Task task = taskRepository.getAll().get(index);
         task.setTitle(title);
         task.setDescription(description);
