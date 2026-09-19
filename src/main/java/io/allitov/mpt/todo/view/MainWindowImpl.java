@@ -1,9 +1,9 @@
 package io.allitov.mpt.todo.view;
 
-import io.allitov.mpt.todo.service.TaskManager;
-import io.allitov.mpt.todo.service.TaskManagerImpl;
 import io.allitov.mpt.todo.model.Project;
 import io.allitov.mpt.todo.model.Task;
+import io.allitov.mpt.todo.service.TaskManager;
+import io.allitov.mpt.todo.service.TaskManagerImpl;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;

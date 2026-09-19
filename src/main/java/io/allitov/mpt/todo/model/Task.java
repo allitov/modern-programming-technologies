@@ -1,77 +1,31 @@
 package io.allitov.mpt.todo.model;
 
+import lombok.Data;
+
 /**
- * Задача в менеджере задач.
+ * Представляет задачу в менеджере задач.
  */
-public interface Task {
+@Data
+public class Task {
+
+    private int id;
+
+    private String title;
+
+    private String description = "";
+
+    private String status = "Todo";
+
+    private String priority = "Medium";
 
     /**
-     * Возвращает идентификатор задачи.
-     *
-     * @return идентификатор задачи.
-     */
-    int getId();
-
-    /**
-     * Задает идентификатор задачи.
+     * Создает задачу с указанным идентификатором и названием.
      *
      * @param id идентификатор задачи.
-     */
-    void setId(int id);
-
-    /**
-     * Возвращает название задачи.
-     *
-     * @return название задачи.
-     */
-    String getTitle();
-
-    /**
-     * Задает название задачи.
-     *
      * @param title название задачи.
      */
-    void setTitle(String title);
-
-    /**
-     * Возвращает описание задачи.
-     *
-     * @return описание задачи.
-     */
-    String getDescription();
-
-    /**
-     * Задает описание задачи.
-     *
-     * @param description описание задачи.
-     */
-    void setDescription(String description);
-
-    /**
-     * Возвращает статус задачи.
-     *
-     * @return статус задачи.
-     */
-    String getStatus();
-
-    /**
-     * Задает статус задачи.
-     *
-     * @param status статус задачи.
-     */
-    void setStatus(String status);
-
-    /**
-     * Возвращает приоритет задачи.
-     *
-     * @return приоритет задачи.
-     */
-    String getPriority();
-
-    /**
-     * Задает приоритет задачи.
-     *
-     * @param priority приоритет задачи.
-     */
-    void setPriority(String priority);
+    public Task(int id, String title) {
+        this.id = id;
+        this.title = title;
+    }
 }

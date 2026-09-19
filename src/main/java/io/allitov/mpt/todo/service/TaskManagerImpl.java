@@ -1,14 +1,12 @@
 package io.allitov.mpt.todo.service;
 
-import java.util.List;
-
 import io.allitov.mpt.todo.model.Project;
-import io.allitov.mpt.todo.model.ProjectImpl;
 import io.allitov.mpt.todo.model.Task;
-import io.allitov.mpt.todo.model.TaskImpl;
 import io.allitov.mpt.todo.repository.Repository;
 import io.allitov.mpt.todo.repository.RepositoryImpl;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 /**
  * Управляет задачами и проектами.
@@ -26,7 +24,7 @@ public class TaskManagerImpl implements TaskManager {
 
     @Override
     public void addTask(String title, String description, String priority, String status) {
-        Task task = new TaskImpl(nextTaskId++, title);
+        Task task = new Task(nextTaskId++, title);
         task.setDescription(description);
         task.setPriority(priority);
         task.setStatus(status);
@@ -55,7 +53,7 @@ public class TaskManagerImpl implements TaskManager {
 
     @Override
     public void addProject(String name) {
-            projectRepository.add(new ProjectImpl(nextProjectId++, name));
+            projectRepository.add(new Project(nextProjectId++, name));
     }
 
     @Override
