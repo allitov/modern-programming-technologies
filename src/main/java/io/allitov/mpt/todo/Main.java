@@ -9,9 +9,8 @@ public final class Main {
 
     /**
      * Запускает окно менеджера задач в потоке обработки событий Swing.
-     *
      */
     static void main() {
-        EventQueue.invokeLater(() -> new MainWindow().show());
+        EventQueue.invokeLater(() -> new MainWindowImpl().show());
     }
 }

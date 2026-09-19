@@ -1,0 +1,64 @@
+package io.allitov.mpt.todo;
+
+import java.util.List;
+
+import lombok.NoArgsConstructor;
+
+/**
+ * Управляет задачами и проектами.
+ */
+@NoArgsConstructor
+public class TaskManagerImpl implements TaskManager {
+
+    private final Repository<Task> taskRepository = new RepositoryImpl<>();
+
+    private final Repository<Project> projectRepository = new RepositoryImpl<>();
+
+    private int nextTaskId = 1;
+
+    private int nextProjectId = 1;
+
+    @Override
+    public void addTask(String title, String description, String priority, String status) {
+        Task task = new TaskImpl(nextTaskId++, title);
+        task.setDescription(description);
+        task.setPriority(priority);
+        task.setStatus(status);
+        taskRepository.add(task);
+    }
+
+    @Override
+    public void updateTask(int index, String title, String description, String priority, String status) {
+        Task task = taskRepository.getAll().get(index);
+        task.setTitle(title);
+        task.setDescription(description);
+        task.setPriority(priority);
+        task.setStatus(status);
+        taskRepository.update(index, task);
+    }
+
+    @Override
+    public void deleteTask(int index) {
+        taskRepository.remove(index);
+    }
+
+    @Override
+    public List<Task> getTasks() {
+        return taskRepository.getAll();
+    }
+
+    @Override
+    public void addProject(String name) {
+            projectRepository.add(new ProjectImpl(nextProjectId++, name));
+    }
+
+    @Override
+    public void deleteProject(int index) {
+        projectRepository.remove(index);
+    }
+
+    @Override
+    public List<Project> getProjects() {
+        return projectRepository.getAll();
+    }
+}

@@ -1,26 +1,35 @@
 package io.allitov.mpt.todo;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
-
 /**
- * Представляет проект в менеджере задач.
+ * Проект в менеджере задач.
  */
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode
-@ToString
-@Data
-public class Project {
+public interface Project {
 
-    private int id;
+    /**
+     * Возвращает идентификатор проекта.
+     *
+     * @return идентификатор проекта.
+     */
+    int getId();
 
-    private String name = "";
+    /**
+     * Задает идентификатор проекта.
+     *
+     * @param id идентификатор проекта.
+     */
+    void setId(int id);
+
+    /**
+     * Возвращает название проекта.
+     *
+     * @return название проекта.
+     */
+    String getName();
+
+    /**
+     * Задает название проекта.
+     *
+     * @param name название проекта.
+     */
+    void setName(String name);
 }

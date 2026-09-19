@@ -5,15 +5,7 @@ import java.util.List;
 /**
  * Управляет задачами и проектами.
  */
-public class TaskManager {
-
-    private final Repository<Task> taskRepository = new Repository<>();
-
-    private final Repository<Project> projectRepository = new Repository<>();
-
-    private int nextTaskId = 1;
-
-    private int nextProjectId = 1;
+public interface TaskManager {
 
     /**
      * Добавляет новую задачу.
@@ -23,13 +15,7 @@ public class TaskManager {
      * @param priority приоритет задачи.
      * @param status статус задачи.
      */
-    public void addTask(String title, String description, String priority, String status) {
-        Task task = new Task(nextTaskId++, title);
-        task.setDescription(description);
-        task.setPriority(priority);
-        task.setStatus(status);
-        taskRepository.add(task);
-    }
+    void addTask(String title, String description, String priority, String status);
 
     /**
      * Обновляет задачу по ее индексу, сохраняя исходный идентификатор.
@@ -40,57 +26,40 @@ public class TaskManager {
      * @param priority новый приоритет задачи.
      * @param status новый статус задачи.
      */
-    public void updateTask(int index, String title, String description, String priority, String status) {
-        Task task = taskRepository.getAll().get(index);
-        task.setTitle(title);
-        task.setDescription(description);
-        task.setPriority(priority);
-        task.setStatus(status);
-        taskRepository.update(index, task);
-    }
+    void updateTask(int index, String title, String description, String priority, String status);
 
     /**
      * Удаляет задачу по ее индексу.
      *
      * @param index индекс удаляемой задачи.
      */
-    public void deleteTask(int index) {
-        taskRepository.remove(index);
-    }
+    void deleteTask(int index);
 
     /**
      * Возвращает список всех задач.
      *
      * @return список задач.
      */
-    public List<Task> getTasks() {
-        return taskRepository.getAll();
-    }
+    List<Task> getTasks();
 
     /**
      * Добавляет новый проект.
      *
      * @param name название проекта.
      */
-    public void addProject(String name) {
-        projectRepository.add(new Project(nextProjectId++, name));
-    }
+    void addProject(String name);
 
     /**
      * Удаляет проект по его индексу.
      *
      * @param index индекс удаляемого проекта.
      */
-    public void deleteProject(int index) {
-        projectRepository.remove(index);
-    }
+    void deleteProject(int index);
 
     /**
      * Возвращает список всех проектов.
      *
      * @return список проектов.
      */
-    public List<Project> getProjects() {
-        return projectRepository.getAll();
-    }
+    List<Project> getProjects();
 }

@@ -1,6 +1,5 @@
 package io.allitov.mpt.todo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,27 +7,21 @@ import java.util.List;
  *
  * @param <T> тип хранимого элемента.
  */
-public class Repository<T> {
-
-    private final List<T> items = new ArrayList<>();
+public interface Repository<T> {
 
     /**
      * Добавляет элемент в конец хранилища.
      *
      * @param item добавляемый элемент.
      */
-    public void add(T item) {
-        items.add(item);
-    }
+    void add(T item);
 
     /**
      * Удаляет элемент по его индексу.
      *
      * @param index индекс удаляемого элемента.
      */
-    public void remove(int index) {
-        items.remove(index);
-    }
+    void remove(int index);
 
     /**
      * Заменяет элемент по его индексу.
@@ -36,32 +29,24 @@ public class Repository<T> {
      * @param index индекс заменяемого элемента.
      * @param item новый элемент.
      */
-    public void update(int index, T item) {
-        items.set(index, item);
-    }
+    void update(int index, T item);
 
     /**
      * Возвращает количество элементов в хранилище.
      *
      * @return количество элементов.
      */
-    public int size() {
-        return items.size();
-    }
+    int size();
 
     /**
      * Возвращает копию списка всех элементов хранилища.
      *
      * @return список всех элементов.
      */
-    public List<T> getAll() {
-        return new ArrayList<>(items);
-    }
+    List<T> getAll();
 
     /**
      * Удаляет все элементы из хранилища.
      */
-    public void clear() {
-        items.clear();
-    }
+    void clear();
 }
